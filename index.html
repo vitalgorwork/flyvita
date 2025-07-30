@@ -1,0 +1,60 @@
+<body style="background-color: #075c63; font-family: sans-serif; padding: 40px;">
+
+   <!-- ЛОГО -->
+  <div style="text-align: center; margin-bottom: 30px;">
+    <img src="flyVitaTransparent.png" alt="FlyVita Logo" style="height: 150px; margin: 10px auto; display: block;" />
+  </div>
+
+  <form action="https://formspree.io/f/mgvzygnj" method="POST" 
+    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #ffffff; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+    
+    <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px; color: #075c63;">Request a quote for your flight</h2>
+
+    <label style="display: block; color: #333;">From:
+      <input type="text" name="from" placeholder="City or Airport" required 
+        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    </label>
+
+    <label style="display: block; color: #333;">To:
+      <input type="text" name="to" placeholder="City or Airport" required 
+        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    </label>
+
+    <label style="display: block; color: #333;">Departure Date:
+      <input type="date" name="departure" required 
+        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    </label>
+
+    <label style="display: block; color: #333;">Return Date:
+      <input type="date" name="return" 
+        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    </label>
+
+    <label style="display: block; color: #333;">Class:
+      <select name="class" required 
+        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
+        <option>Business</option>
+        <option>First</option>
+        <option>Premium Economy</option>
+        <option>Economy</option>
+      </select>
+    </label>
+
+    <label style="display: block; color: #333;">Your Name:
+      <input type="text" name="name" required placeholder="Full Name" 
+        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    </label>
+
+    <label style="display: block; color: #333;">Email:
+      <input type="email" name="email" required placeholder="your@example.com" 
+        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;" />
+    </label>
+
+    <button type="submit" 
+      style="width: 100%; padding: 12px; background-color: #0b6e76; color: white; font-weight: bold; border: none; border-radius: 8px;">
+      Request Quote
+    </button>
+
+  </form>
+
+</body>
