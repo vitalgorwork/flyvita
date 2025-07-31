@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <title>FlyVita</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <style>
-    input, select, button {
+    input, select {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       margin-top: 5px;
       margin-bottom: 15px;
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      font-size: 16px;
     }
 
     .submit-button {
+      width: 100%;
+      padding: 12px;
       background-color: #008080;
       color: white;
       font-weight: bold;
@@ -26,6 +26,9 @@
     }
 
     .google-button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
       background-color: #FFD700;
       color: black;
       font-weight: bold;
@@ -33,6 +36,9 @@
       border-radius: 8px;
       cursor: pointer;
       text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -44,7 +50,7 @@
   </div>
 
   <!-- ФОРМА -->
-  <form action="https://formspree.io/f/mgvzygnj" method="POST"
+  <form id="flightForm" action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
@@ -60,11 +66,11 @@
     </label>
 
     <label>Departure Date:
-      <input type="text" id="departure" name="departure" required />
+      <input type="date" id="departureDate" name="departure" required />
     </label>
 
     <label>Return Date:
-      <input type="text" id="return" name="return" />
+      <input type="date" id="returnDate" name="return" />
     </label>
 
     <label>Class:
@@ -102,36 +108,29 @@
     </p>
   </div>
 
-  <!-- СКРИПТЫ -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <!-- АВТОЗАПОЛНЕНИЕ + GOOGLE LINK -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
       { "name": "Los Angeles Intl", "city": "Los Angeles", "iata": "LAX" },
-      { "name": "Chicago O'Hare Intl", "city": "Chicago", "iata": "ORD" },
       { "name": "John F Kennedy Intl", "city": "New York", "iata": "JFK" },
       { "name": "San Francisco Intl", "city": "San Francisco", "iata": "SFO" },
       { "name": "Tokyo International Airport", "city": "Tokyo", "iata": "HND" },
-      { "name": "Dubai Intl", "city": "Dubai", "iata": "DXB" },
-      { "name": "Vladivostok International Airport", "city": "Vladivostok", "iata": "VVO" },
-      { "name": "Sheremetyevo Intl", "city": "Moscow", "iata": "SVO" }
+      { "name": "Vladivostok International Airport", "city": "Vladivostok", "iata": "VVO" }
     ];
 
     function autocomplete(inputId, listId) {
       const input = document.getElementById(inputId);
       const datalist = document.getElementById(listId);
-
       input.addEventListener('input', function () {
         const val = this.value.toLowerCase();
         datalist.innerHTML = '';
         if (val.length < 2) return;
-
         const filtered = airports.filter(a =>
           a.name.toLowerCase().includes(val) ||
           a.city.toLowerCase().includes(val) ||
           a.iata.toLowerCase().startsWith(val)
         ).slice(0, 10);
-
         filtered.forEach(a => {
           const option = document.createElement('option');
           option.value = `${a.city} (${a.iata})`;
@@ -140,40 +139,31 @@
       });
     }
 
-    // Google Flights URL
-    function updateGoogleLink() {
-      const from = document.getElementById('from').value.match(/\(([^)]+)\)/);
-      const to = document.getElementById('to').value.match(/\(([^)]+)\)/);
-      const departure = document.getElementById('departure').value;
-      const returnDate = document.getElementById('return').value;
-
-      if (from && to && departure) {
-        let url = `https://www.google.com/flights?hl=en#flt=${from[1]}.${to[1]}.${departure}`;
-        if (returnDate) {
-          url += `*${to[1]}.${from[1]}.${returnDate}`;
-        }
-        url += `;c:USD;e:1;sd:1;t:f`;
-        document.getElementById('googleLink').href = url;
-      }
-    }
-
     window.onload = () => {
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
 
-      flatpickr("#departure", {
-        minDate: "today",
-        onChange: updateGoogleLink
-      });
-
-      flatpickr("#return", {
-        minDate: "today",
-        onChange: updateGoogleLink
-      });
-
+      // Обновление ссылки Google Flights
       document.getElementById('from').addEventListener('input', updateGoogleLink);
       document.getElementById('to').addEventListener('input', updateGoogleLink);
+      document.getElementById('departureDate').addEventListener('change', updateGoogleLink);
     };
+
+    function extractIATA(value) {
+      const match = value.match(/\(([^)]+)\)$/);
+      return match ? match[1] : '';
+    }
+
+    function updateGoogleLink() {
+      const from = extractIATA(document.getElementById('from').value);
+      const to = extractIATA(document.getElementById('to').value);
+      const departure = document.getElementById('departureDate').value;
+
+      if (from && to && departure) {
+        const url = `https://www.google.com/flights?hl=en#flt=${from}.${to}.${departure}`;
+        document.getElementById('googleLink').href = url;
+      }
+    }
   </script>
 </body>
 </html>
