@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>FlyVita</title>
+  <style>
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 <body style="background-color: #053447; font-family: sans-serif; padding: 40px;">
 
@@ -12,36 +23,31 @@
   </div>
 
   <!-- ФОРМА -->
-  <form action="https://formspree.io/f/mgvzygnj" method="POST" 
+  <form action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
-    <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px; color: white;">Request a quote for your flight</h2>
+    <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
 
-    <label style="display: block; color: #ffffff;">From:
-      <input type="text" id="from" name="from" list="from-list" placeholder="City or Airport" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    <label>From:
+      <input type="text" id="from" name="from" list="from-list" placeholder="City or Airport" required />
       <datalist id="from-list"></datalist>
     </label>
 
-    <label style="display: block; color: #ffffff;">To:
-      <input type="text" id="to" name="to" list="to-list" placeholder="City or Airport" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    <label>To:
+      <input type="text" id="to" name="to" list="to-list" placeholder="City or Airport" required />
       <datalist id="to-list"></datalist>
     </label>
 
-    <label style="display: block; color: #ffffff;">Departure Date:
-      <input type="date" name="departure" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    <label>Departure Date:
+      <input type="date" name="departure" required />
     </label>
 
-    <label style="display: block; color: #ffffff;">Return Date:
-      <input type="date" name="return" 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    <label>Return Date:
+      <input type="date" name="return" />
     </label>
 
-    <label style="display: block; color: #ffffff;">Class:
-      <select name="class" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
+    <label>Class:
+      <select name="class" required>
         <option>Business</option>
         <option>First</option>
         <option>Premium Economy</option>
@@ -49,17 +55,15 @@
       </select>
     </label>
 
-    <label style="display: block; color: #ffffff;">Your Name:
-      <input type="text" name="name" required placeholder="Full Name" 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+    <label>Your Name:
+      <input type="text" name="name" required placeholder="Full Name" />
     </label>
 
-    <label style="display: block; color: #ffffff;">Email:
-      <input type="email" name="email" required placeholder="your@example.com" 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;" />
+    <label>Email:
+      <input type="email" name="email" required placeholder="your@example.com" />
     </label>
 
-    <button type="submit" 
+    <button type="submit"
       style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
       Request Quote
     </button>
@@ -81,7 +85,7 @@
   <script>
     let airports = [];
 
-    fetch('airports.json') // путь к локальному файлу с аэропортами
+    fetch('airports.json')
       .then(response => response.json())
       .then(data => {
         airports = data;
