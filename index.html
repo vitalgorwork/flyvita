@@ -3,22 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <title>FlyVita</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <style>
-    input, select, button {
+    input, select {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 5px;
       margin-bottom: 15px;
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+      font-size: 16px;
+      height: 48px;
+    }
+    button {
+      font-size: 16px;
+      height: 50px;
     }
     .google-button {
-      background-color: #fbbc05;
-      color: black;
+      margin-top: 10px;
+      display: block;
+      width: 100%;
+      background-color: #f8f8f8;
+      color: #053447;
       font-weight: bold;
-      border: none;
-      cursor: pointer;
+      text-align: center;
+      border-radius: 8px;
+      border: 2px solid #008080;
+      padding: 12px;
+      text-decoration: none;
+    }
+    .google-button:hover {
+      background-color: #008080;
+      color: white;
     }
   </style>
 </head>
@@ -30,7 +47,7 @@
   </div>
 
   <!-- ФОРМА -->
-  <form id="flightForm" action="https://formspree.io/f/mgvzygnj" method="POST"
+  <form id="flight-form" action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
@@ -46,11 +63,11 @@
     </label>
 
     <label>Departure Date:
-      <input type="date" id="departure" name="departure" required />
+      <input type="text" id="departure" name="departure" required />
     </label>
 
     <label>Return Date:
-      <input type="date" id="return" name="return" />
+      <input type="text" id="return" name="return" />
     </label>
 
     <label>Class:
@@ -71,12 +88,12 @@
     </label>
 
     <button type="submit"
-      style="background-color: #008080; color: white; font-weight: bold;">
+      style="width: 100%; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
       Request Quote
     </button>
 
-    <!-- КНОПКА GOOGLE FLIGHTS -->
-    <button type="button" class="google-button" onclick="openGoogleFlights()">Compare on Google Flights</button>
+    <!-- Google Flights Button -->
+    <a href="#" id="google-flights-link" target="_blank" class="google-button">Compare on Google Flights</a>
   </form>
 
   <!-- CONTACT SECTION -->
@@ -91,7 +108,10 @@
     </p>
   </div>
 
-  <!-- СКРИПТ -->
+  <!-- LIBS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <!-- АВТОЗАПОЛНЕНИЕ + FLATPICKR + GOOGLE LINK -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
@@ -104,8 +124,6 @@
       { "name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA" },
       { "name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS" },
       { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" },
-      { "name": "Miami Intl", "city": "Miami", "iata": "MIA" },
-      { "name": "Phoenix Sky Harbor Intl", "city": "Phoenix", "iata": "PHX" },
       {"name": "Tokyo International Airport", "city": "Tokyo International Airport", "iata": "HND"},
       {"name": "Dubai Creek SPB", "city": "Dubai Creek SPB", "iata": "DCG"},
       {"name": "Vladivostok International Airport", "city": "Vladivostok International Airport", "iata": "VVO"},
@@ -115,18 +133,15 @@
     function autocomplete(inputId, listId) {
       const input = document.getElementById(inputId);
       const datalist = document.getElementById(listId);
-
       input.addEventListener('input', function () {
         const val = this.value.toLowerCase();
         datalist.innerHTML = '';
         if (val.length < 2) return;
-
         const filtered = airports.filter(a =>
           a.name.toLowerCase().includes(val) ||
           a.city.toLowerCase().includes(val) ||
           a.iata.toLowerCase().startsWith(val)
         ).slice(0, 10);
-
         filtered.forEach(a => {
           const option = document.createElement('option');
           option.value = `${a.city} (${a.iata})`;
@@ -135,26 +150,45 @@
       });
     }
 
-    function openGoogleFlights() {
-      const from = document.getElementById("from").value.match(/\(([A-Z]{3})\)/);
-      const to = document.getElementById("to").value.match(/\(([A-Z]{3})\)/);
-      const date = document.getElementById("departure").value;
+    function extractIATA(inputValue) {
+      const match = inputValue.match(/\(([^)]+)\)$/);
+      return match ? match[1] : '';
+    }
 
-      if (!from || !to || !date) {
-        alert("Please fill in From, To, and Departure Date correctly.");
-        return;
+    function updateGoogleLink() {
+      const from = extractIATA(document.getElementById("from").value);
+      const to = extractIATA(document.getElementById("to").value);
+      const depart = document.getElementById("departure").value;
+      const returnDate = document.getElementById("return").value;
+      let link = "https://www.google.com/flights?hl=en#flt=";
+      if (from && to && depart) {
+        link += `${from}.${to}.${depart}`;
+        if (returnDate) {
+          link += `*${to}.${from}.${returnDate}`;
+        }
+        link += ";c:USD;e:1";
+        document.getElementById("google-flights-link").href = link;
       }
-
-      const url = `https://www.google.com/travel/flights?q=flights%20from%20${from[1]}%20to%20${to[1]}%20on%20${date}`;
-      window.open(url, "_blank");
     }
 
     window.onload = () => {
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById("departure").setAttribute("min", today);
-      document.getElementById("return").setAttribute("min", today);
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
+
+      flatpickr("#departure", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        onChange: updateGoogleLink
+      });
+
+      flatpickr("#return", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        onChange: updateGoogleLink
+      });
+
+      document.getElementById("from").addEventListener("change", updateGoogleLink);
+      document.getElementById("to").addEventListener("change", updateGoogleLink);
     };
   </script>
 </body>
