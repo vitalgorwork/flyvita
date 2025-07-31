@@ -13,19 +13,6 @@
       border: 1px solid #ccc;
       box-sizing: border-box;
     }
-    .google-btn {
-      display: block;
-      text-align: center;
-      margin-top: 15px;
-      background-color: #ff9800;
-      padding: 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      opacity: 0.5;
-      pointer-events: none;
-    }
   </style>
 </head>
 <body style="background-color: #053447; font-family: sans-serif; padding: 40px;">
@@ -37,8 +24,7 @@
 
   <!-- ФОРМА -->
   <form action="https://formspree.io/f/mgvzygnj" method="POST"
-    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;"
-    oninput="updateGoogleFlightsLink()">
+    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
 
@@ -53,11 +39,11 @@
     </label>
 
     <label>Departure Date:
-      <input type="date" id="departure" name="departure" required />
+      <input type="date" name="departure" id="departure" required />
     </label>
 
     <label>Return Date:
-      <input type="date" name="return" />
+      <input type="date" name="return" id="return" />
     </label>
 
     <label>Class:
@@ -81,9 +67,6 @@
       style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
       Request Quote
     </button>
-
-    <!-- КНОПКА GOOGLE FLIGHTS -->
-    <a id="googleLink" class="google-btn" target="_blank">Compare on Google Flights</a>
   </form>
 
   <!-- CONTACT SECTION -->
@@ -98,7 +81,7 @@
     </p>
   </div>
 
-  <!-- СКРИПТ АВТОЗАПОЛНЕНИЯ И GOOGLE FLIGHTS -->
+  <!-- АВТОЗАПОЛНЕНИЕ И БЛОКИРОВКА ПРОШЕДШИХ ДАТ -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
@@ -111,6 +94,8 @@
       { "name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA" },
       { "name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS" },
       { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" },
+      { "name": "Miami Intl", "city": "Miami", "iata": "MIA" },
+      { "name": "Phoenix Sky Harbor Intl", "city": "Phoenix", "iata": "PHX" },
       {"name": "Tokyo International Airport", "city": "Tokyo International Airport", "iata": "HND"},
       {"name": "Dubai Creek SPB", "city": "Dubai Creek SPB", "iata": "DCG"},
       {"name": "Vladivostok International Airport", "city": "Vladivostok International Airport", "iata": "VVO"},
@@ -140,38 +125,17 @@
       });
     }
 
-    function extractIATA(input) {
-      const match = input.match(/\(([^)]+)\)$/);
-      return match ? match[1] : '';
-    }
-
-    function updateGoogleFlightsLink() {
-      const fromInput = document.getElementById("from").value;
-      const toInput = document.getElementById("to").value;
-      const date = document.getElementById("departure").value;
-
-      const fromIATA = extractIATA(fromInput);
-      const toIATA = extractIATA(toInput);
-
-      const link = document.getElementById("googleLink");
-
-      if (fromIATA && toIATA && date) {
-        const query = `flights from ${fromIATA} to ${toIATA} on ${date}`;
-        const url = `https://www.google.com/travel/flights?q=${encodeURIComponent(query)}`;
-        link.href = url;
-        link.style.opacity = "1";
-        link.style.pointerEvents = "auto";
-      } else {
-        link.href = "#";
-        link.style.opacity = "0.5";
-        link.style.pointerEvents = "none";
-      }
-    }
-
     window.onload = () => {
+      // Блокируем выбор прошедших дат
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById("departure").setAttribute("min", today);
+      document.getElementById("return").setAttribute("min", today);
+
+      // Автозаполнение аэропортов
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
     };
   </script>
+
 </body>
 </html>
