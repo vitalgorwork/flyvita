@@ -13,6 +13,19 @@
       border: 1px solid #ccc;
       box-sizing: border-box;
     }
+    .google-btn {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      background-color: #ff9800;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      opacity: 0.5;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body style="background-color: #053447; font-family: sans-serif; padding: 40px;">
@@ -24,7 +37,8 @@
 
   <!-- ФОРМА -->
   <form action="https://formspree.io/f/mgvzygnj" method="POST"
-    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
+    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;"
+    oninput="updateGoogleFlightsLink()">
 
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
 
@@ -67,15 +81,10 @@
       style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
       Request Quote
     </button>
-  </form>
 
-  <!-- КНОПКА GOOGLE FLIGHTS -->
-  <div style="max-width: 600px; margin: 20px auto 0; text-align: center;">
-    <a id="googleLink" href="#" target="_blank"
-       style="display: inline-block; padding: 12px 20px; background-color: #ffffff; color: #075c63; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); opacity: 0.5; pointer-events: none;">
-      🔍 Compare prices on Google Flights
-    </a>
-  </div>
+    <!-- КНОПКА GOOGLE FLIGHTS -->
+    <a id="googleLink" class="google-btn" target="_blank">Compare on Google Flights</a>
+  </form>
 
   <!-- CONTACT SECTION -->
   <div style="max-width: 600px; margin: 30px auto 0; background-color: #075c63; padding: 2em; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; color: white;">
@@ -89,7 +98,7 @@
     </p>
   </div>
 
-  <!-- СКРИПТ: автозаполнение и Google Flights -->
+  <!-- СКРИПТ АВТОЗАПОЛНЕНИЯ И GOOGLE FLIGHTS -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
@@ -101,21 +110,7 @@
       { "name": "San Francisco Intl", "city": "San Francisco", "iata": "SFO" },
       { "name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA" },
       { "name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS" },
-      { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" },
-      { "name": "Miami Intl", "city": "Miami", "iata": "MIA" },
-      { "name": "Phoenix Sky Harbor Intl", "city": "Phoenix", "iata": "PHX" },
-      { "name": "Logan Intl", "city": "Boston", "iata": "BOS" },
-      { "name": "Charlotte Douglas Intl", "city": "Charlotte", "iata": "CLT" },
-      { "name": "Detroit Metro Wayne Co", "city": "Detroit", "iata": "DTW" },
-      { "name": "Minneapolis St Paul Intl", "city": "Minneapolis", "iata": "MSP" },
-      { "name": "Philadelphia Intl", "city": "Philadelphia", "iata": "PHL" },
-      { "name": "George Bush Intercontinental", "city": "Houston", "iata": "IAH" },
-      { "name": "Salt Lake City Intl", "city": "Salt Lake City", "iata": "SLC" },
-      { "name": "Washington Dulles Intl", "city": "Washington", "iata": "IAD" },
-      {"name": "Tokyo International Airport", "city": "Tokyo International Airport", "iata": "HND"},
-      {"name": "Dubai Creek SPB", "city": "Dubai Creek SPB", "iata": "DCG"},
-      {"name": "Vladivostok International Airport", "city": "Vladivostok International Airport", "iata": "VVO"},
-      {"name": "Khabarovsk-Novy Airport", "city": "Khabarovsk-Novy Airport", "iata": "KHV"}
+      { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" }
     ];
 
     function autocomplete(inputId, listId) {
@@ -141,20 +136,25 @@
       });
     }
 
-    function extractIATA(text) {
-      const match = text.match(/\(([^)]+)\)$/);
-      return match ? match[1].toUpperCase() : null;
+    function extractIATA(input) {
+      const match = input.match(/\(([^)]+)\)$/);
+      return match ? match[1] : '';
     }
 
     function updateGoogleFlightsLink() {
-      const fromIATA = extractIATA(document.getElementById("from").value);
-      const toIATA = extractIATA(document.getElementById("to").value);
+      const fromInput = document.getElementById("from").value;
+      const toInput = document.getElementById("to").value;
       const date = document.getElementById("departure").value;
+
+      const fromIATA = extractIATA(fromInput);
+      const toIATA = extractIATA(toInput);
 
       const link = document.getElementById("googleLink");
 
       if (fromIATA && toIATA && date) {
-        link.href = `https://www.google.com/flights?hl=en#flt=${fromIATA}.${toIATA}.${date}`;
+        const query = `flights from ${fromIATA} to ${toIATA} on ${date}`;
+        const url = `https://www.google.com/travel/flights?q=${encodeURIComponent(query)}`;
+        link.href = url;
         link.style.opacity = "1";
         link.style.pointerEvents = "auto";
       } else {
@@ -167,10 +167,6 @@
     window.onload = () => {
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
-
-      document.getElementById("from").addEventListener("input", updateGoogleFlightsLink);
-      document.getElementById("to").addEventListener("input", updateGoogleFlightsLink);
-      document.getElementById("departure").addEventListener("input", updateGoogleFlightsLink);
     };
   </script>
 </body>
