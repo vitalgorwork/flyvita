@@ -12,7 +12,7 @@
 
     input, select {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 5px;
       margin-bottom: 15px;
       border-radius: 6px;
@@ -21,20 +21,10 @@
       font-size: 16px;
     }
 
-    .google-button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      background-color: #FFD700;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: block;
+    input[type="date"] {
       font-size: 16px;
+      transform: scale(1.2);
+      transform-origin: left top;
     }
   </style>
 </head>
@@ -90,10 +80,6 @@
       style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
       Request Quote
     </button>
-
-    <!-- GOOGLE FLIGHTS BUTTON -->
-    <a id="google-flights-link" class="google-button" href="#" target="_blank">Compare on Google Flights</a>
-
   </form>
 
   <!-- CONTACT SECTION -->
@@ -155,26 +141,6 @@
       document.getElementById('departure-date').setAttribute('min', today);
       document.getElementById('return-date').setAttribute('min', today);
     };
-
-    // Google Flights button logic
-    document.getElementById("google-flights-link").addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const from = document.getElementById("from").value.match(/\((.*?)\)/);
-      const to = document.getElementById("to").value.match(/\((.*?)\)/);
-      const departure = document.getElementById("departure-date").value;
-      const returnDate = document.getElementById("return-date").value;
-
-      if (from && to && departure) {
-        let url = `https://www.google.com/travel/flights?q=Flights%20from%20${from[1]}%20to%20${to[1]}%20on%20${departure}`;
-        if (returnDate) {
-          url += `%20return%20on%20${returnDate}`;
-        }
-        window.open(url, '_blank');
-      } else {
-        alert("Please fill out From, To, and Departure Date to compare on Google Flights.");
-      }
-    });
   </script>
 </body>
 </html>
