@@ -1,70 +1,51 @@
-<body style="background-color: #eaf4f4; font-family: sans-serif; padding: 40px;">
+<form action="https://formspree.io/f/mgvzygnj" method="POST" 
+  style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
-   <!-- ЛОГО -->
-  <div style="text-align: center; margin-bottom: 30px;">
-    <img src="flyVitaTransparent.png" alt="FlyVita Logo" style="height: 150px; margin: 10px auto; display: block;" />
-  </div>
+  <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px; color: white;">Request a quote for your flight</h2>
 
-  <form action="https://formspree.io/f/mgvzygnj" method="POST" 
-    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #ffffff; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
-    
-    <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px; color: #075c63;">Request a quote for your flight</h2>
+  <label style="display: block; color: #ffffff;">From:
+    <input type="text" name="from" placeholder="City or Airport" required 
+      style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+  </label>
 
-    <label style="display: block; color: #333;">From:
-      <input type="text" name="from" placeholder="City or Airport" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
-    </label>
+  <label style="display: block; color: #ffffff;">To:
+    <input type="text" name="to" placeholder="City or Airport" required 
+      style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+  </label>
 
-    <label style="display: block; color: #333;">To:
-      <input type="text" name="to" placeholder="City or Airport" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
-    </label>
+  <label style="display: block; color: #ffffff;">Departure Date:
+    <input type="date" name="departure" required 
+      style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+  </label>
 
-    <label style="display: block; color: #333;">Departure Date:
-      <input type="date" name="departure" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
-    </label>
+  <label style="display: block; color: #ffffff;">Return Date:
+    <input type="date" name="return" 
+      style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+  </label>
 
-    <label style="display: block; color: #333;">Return Date:
-      <input type="date" name="return" 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
-    </label>
+  <label style="display: block; color: #ffffff;">Class:
+    <select name="class" required 
+      style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
+      <option>Business</option>
+      <option>First</option>
+      <option>Premium Economy</option>
+      <option>Economy</option>
+    </select>
+  </label>
 
-    <label style="display: block; color: #333;">Class:
-      <select name="class" required 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
-        <option>Business</option>
-        <option>First</option>
-        <option>Premium Economy</option>
-        <option>Economy</option>
-      </select>
-    </label>
+  <label style="display: block; color: #ffffff;">Your Name:
+    <input type="text" name="name" required placeholder="Full Name" 
+      style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+  </label>
 
-    <label style="display: block; color: #333;">Your Name:
-      <input type="text" name="name" required placeholder="Full Name" 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
-    </label>
+  <label style="display: block; color: #ffffff;">Email:
+    <input type="email" name="email" required placeholder="your@example.com" 
+      style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;" />
+  </label>
 
-    <label style="display: block; color: #333;">Email:
-      <input type="email" name="email" required placeholder="your@example.com" 
-        style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;" />
-    </label>
+  <button type="submit" 
+    style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
+    Request Quote
+  </button>
 
-    <button type="submit" 
-      style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
-      Request Quote
-    </button>
-
-  </form>
-
-  <!-- CONTACT SECTION -->
-  <div style="max-width: 600px; margin: 30px auto 0; background-color: #075c63; padding: 20px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
-    <p style="margin: 10px 0; font-size: 18px;">
-      📞 <a href="tel:+16505051070" style="color: white; text-decoration: none;">+1 (650) 505‑1070</a>
-    </p>
-    <p style="margin: 10px 0; font-size: 18px;">
-      💬 <a href="https://wa.me/16505051070" target="_blank" style="color: white; text-decoration: none;">WhatsApp: +1 (650) 505‑1070</a>
-    </p>
-  </div>
-
-</body>
+</form>
