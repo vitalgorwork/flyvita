@@ -81,15 +81,21 @@
     </p>
   </div>
 
-  <!-- SCRIPT -->
+  <!-- SCRIPT: встроенный JSON -->
   <script>
-    let airports = [];
-
-    fetch('airports.json')
-      .then(response => response.json())
-      .then(data => {
-        airports = data;
-      });
+    const airports = [
+      {"name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL"},
+      {"name": "Los Angeles Intl", "city": "Los Angeles", "iata": "LAX"},
+      {"name": "Chicago O'Hare Intl", "city": "Chicago", "iata": "ORD"},
+      {"name": "Dallas Fort Worth Intl", "city": "Dallas-Fort Worth", "iata": "DFW"},
+      {"name": "Denver Intl", "city": "Denver", "iata": "DEN"},
+      {"name": "John F Kennedy Intl", "city": "New York", "iata": "JFK"},
+      {"name": "San Francisco Intl", "city": "San Francisco", "iata": "SFO"},
+      {"name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA"},
+      {"name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS"},
+      {"name": "Orlando Intl", "city": "Orlando", "iata": "MCO"}
+      // Можно добавить больше аэропортов по аналогии
+    ];
 
     function autocomplete(inputId, listId) {
       const input = document.getElementById(inputId);
