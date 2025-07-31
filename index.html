@@ -4,8 +4,20 @@
   <meta charset="UTF-8" />
   <title>FlyVita</title>
 
-  <!-- Стили формы -->
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Flatpickr стили -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
   <style>
+    body {
+      background-color: #053447;
+      font-family: 'Poppins', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
     input, select, button {
       width: 100%;
       padding: 12px;
@@ -20,107 +32,99 @@
     input[type="date"] {
       font-size: 16px;
     }
+
+    /* FlyVita presentation block */
+    .flyvita-box {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      background-color: #075c63;
+      color: white;
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .flyvita-box h2 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .flyvita-box p.subtitle {
+      text-align: center;
+      font-size: 17px;
+      margin-bottom: 25px;
+      font-weight: 300;
+    }
+
+    .flyvita-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      line-height: 1.7;
+      font-size: 15.5px;
+    }
+
+    .flyvita-box ul li {
+      margin-bottom: 10px;
+    }
+
+    .flyvita-box p.tagline {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      font-style: italic;
+      color: #d1ecf1;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      .flyvita-box {
+        padding: 1.5em;
+      }
+
+      .flyvita-box h2 {
+        font-size: 22px;
+      }
+
+      .flyvita-box p.subtitle {
+        font-size: 16px;
+      }
+
+      .flyvita-box ul {
+        font-size: 15px;
+      }
+
+      .flyvita-box p.tagline {
+        font-size: 15px;
+      }
+    }
   </style>
-
-  <!-- Google Font: Poppins -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Flatpickr стили -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-<body style="background-color: #053447; font-family: sans-serif; padding: 40px;">
+<body>
 
   <!-- ЛОГО -->
   <div style="text-align: center; margin-bottom: 30px;">
     <img src="flyVitaTransparent.png" alt="FlyVita Logo" style="height: 150px; margin: 10px auto; display: block;" />
   </div>
 
-  <!-- FlyVita Intro Section -->
-<style>
-  .flyvita-box {
-    max-width: 600px;
-    margin: 0 auto 40px;
-    background-color: #075c63;
-    color: white;
-    padding: 2em;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    font-family: 'Poppins', sans-serif;
-  }
+  <!-- FlyVita Welcome Block -->
+  <div class="flyvita-box">
+    <h2>Welcome to FlyVita</h2>
+    <p class="subtitle">Your trusted partner for everything travel</p>
 
-  .flyvita-box h2 {
-    text-align: center;
-    font-size: 26px;
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
+    <ul>
+      <li>✈️ <strong>Flights:</strong> First Class, Business, and Economy fares to destinations worldwide</li>
+      <li>🏨 <strong>Hotels & Resorts:</strong> Handpicked accommodations at unbeatable prices</li>
+      <li>🚢 <strong>Cruises & Tours:</strong> Guided adventures and luxury vacations</li>
+      <li>🌐 <strong>Full Travel Support:</strong> We handle flights, hotels, transfers, insurance & more</li>
+    </ul>
 
-  .flyvita-box p.subtitle {
-    text-align: center;
-    font-size: 17px;
-    margin-bottom: 25px;
-    font-weight: 300;
-  }
-
-  .flyvita-box ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    line-height: 1.7;
-    font-size: 15.5px;
-  }
-
-  .flyvita-box ul li {
-    margin-bottom: 10px;
-  }
-
-  .flyvita-box p.tagline {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    font-style: italic;
-    color: #d1ecf1;
-  }
-
-  /* Mobile adjustments */
-  @media (max-width: 480px) {
-    .flyvita-box {
-      padding: 1.5em;
-    }
-
-    .flyvita-box h2 {
-      font-size: 22px;
-    }
-
-    .flyvita-box p.subtitle {
-      font-size: 16px;
-    }
-
-    .flyvita-box ul {
-      font-size: 15px;
-    }
-
-    .flyvita-box p.tagline {
-      font-size: 15px;
-    }
-  }
-</style>
-
-<div class="flyvita-box">
-  <h2>Welcome to FlyVita</h2>
-  <p class="subtitle">Your trusted partner for everything travel</p>
-
-  <ul>
-    <li>✈️ <strong>Flights:</strong> First Class, Business, and Economy fares to destinations worldwide</li>
-    <li>🏨 <strong>Hotels & Resorts:</strong> Handpicked accommodations at unbeatable prices</li>
-    <li>🚢 <strong>Cruises & Tours:</strong> Guided adventures and luxury vacations</li>
-    <li>🌐 <strong>Full Travel Support:</strong> We handle flights, hotels, transfers, insurance & more</li>
-  </ul>
-
-  <p class="tagline">Fly smarter. Travel better. Your next adventure starts with FlyVita.</p>
-</div>
+    <p class="tagline">Fly smarter. Travel better. Your next adventure starts with FlyVita.</p>
+  </div>
 
   <!-- ФОРМА -->
   <form action="https://formspree.io/f/mgvzygnj" method="POST"
@@ -163,12 +167,12 @@
       <input type="email" name="email" required placeholder="your@example.com" />
     </label>
 
-   <div style="text-align: center;">
-  <button type="submit"
-    style="width: 50%; padding: 18px; margin-top: 35px; background-color: #ffc107; color: black; font-weight: bold; border: none; border-radius: 8px; font-size: 18px;">
-    Request Quote
-  </button>
-</div>
+    <div style="text-align: center;">
+      <button type="submit"
+        style="width: 50%; padding: 18px; margin-top: 35px; background-color: #ffc107; color: black; font-weight: bold; border: none; border-radius: 8px; font-size: 18px;">
+        Request Quote
+      </button>
+    </div>
   </form>
 
   <!-- CONTACT -->
@@ -183,7 +187,7 @@
     </p>
   </div>
 
-  <!-- СПИСОК АЭРОПОРТОВ -->
+  <!-- СКРИПТЫ -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
@@ -199,12 +203,12 @@
       { "name": "Vladivostok Intl", "city": "Vladivostok", "iata": "VVO" },
       { "name": "Tokyo Haneda", "city": "Tokyo", "iata": "HND" },
       { "name": "Dubai Intl", "city": "Dubai", "iata": "DXB" },
-      {"name": "Tokyo International Airport", "city": "Tokyo International Airport", "iata": "HND"},
-      {"name": "Dubai Creek SPB", "city": "Dubai Creek SPB", "iata": "DCG"},
-      {"name": "Vladivostok International Airport", "city": "Vladivostok International Airport", "iata": "VVO"},
-      {"name": "Khabarovsk-Novy Airport", "city": "Khabarovsk-Novy Airport", "iata": "KHV"}
+      { "name": "Tokyo International Airport", "city": "Tokyo International Airport", "iata": "HND" },
+      { "name": "Dubai Creek SPB", "city": "Dubai Creek SPB", "iata": "DCG" },
+      { "name": "Vladivostok International Airport", "city": "Vladivostok International Airport", "iata": "VVO" },
+      { "name": "Khabarovsk-Novy Airport", "city": "Khabarovsk-Novy Airport", "iata": "KHV" }
     ];
-    
+
     function autocomplete(inputId, listId) {
       const input = document.getElementById(inputId);
       const datalist = document.getElementById(listId);
@@ -234,7 +238,6 @@
     };
   </script>
 
-  <!-- Flatpickr: календарь -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
     flatpickr("#departure-date", {
