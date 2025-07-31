@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <title>FlyVita</title>
   <style>
+    body {
+      background-color: #053447;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
     input, select {
       width: 100%;
       padding: 10px;
@@ -12,17 +18,7 @@
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-    }
-
-    .submit-button {
-      width: 100%;
-      padding: 12px;
-      background-color: #008080;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      font-size: 16px;
     }
 
     .google-button {
@@ -37,12 +33,12 @@
       cursor: pointer;
       text-align: center;
       text-decoration: none;
-      display: inline-block;
+      display: block;
       font-size: 16px;
     }
   </style>
 </head>
-<body style="background-color: #053447; font-family: sans-serif; padding: 40px;">
+<body>
 
   <!-- ЛОГО -->
   <div style="text-align: center; margin-bottom: 30px;">
@@ -50,7 +46,7 @@
   </div>
 
   <!-- ФОРМА -->
-  <form id="flightForm" action="https://formspree.io/f/mgvzygnj" method="POST"
+  <form id="quote-form" action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
@@ -66,11 +62,11 @@
     </label>
 
     <label>Departure Date:
-      <input type="date" id="departureDate" name="departure" required />
+      <input type="date" id="departure-date" name="departure" required />
     </label>
 
     <label>Return Date:
-      <input type="date" id="returnDate" name="return" />
+      <input type="date" id="return-date" name="return" />
     </label>
 
     <label>Class:
@@ -90,10 +86,14 @@
       <input type="email" name="email" required placeholder="your@example.com" />
     </label>
 
-    <button type="submit" class="submit-button">Request Quote</button>
+    <button type="submit"
+      style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
+      Request Quote
+    </button>
 
-    <!-- КНОПКА GOOGLE FLIGHTS -->
-    <a id="googleLink" href="#" target="_blank" class="google-button">Compare on Google Flights</a>
+    <!-- GOOGLE FLIGHTS BUTTON -->
+    <a id="google-flights-link" class="google-button" href="#" target="_blank">Compare on Google Flights</a>
+
   </form>
 
   <!-- CONTACT SECTION -->
@@ -108,29 +108,36 @@
     </p>
   </div>
 
-  <!-- АВТОЗАПОЛНЕНИЕ + GOOGLE LINK -->
+  <!-- АВТОЗАПОЛНЕНИЕ -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
       { "name": "Los Angeles Intl", "city": "Los Angeles", "iata": "LAX" },
       { "name": "John F Kennedy Intl", "city": "New York", "iata": "JFK" },
       { "name": "San Francisco Intl", "city": "San Francisco", "iata": "SFO" },
-      { "name": "Tokyo International Airport", "city": "Tokyo", "iata": "HND" },
-      { "name": "Vladivostok International Airport", "city": "Vladivostok", "iata": "VVO" }
+      { "name": "Chicago O'Hare Intl", "city": "Chicago", "iata": "ORD" },
+      { "name": "Dallas Fort Worth Intl", "city": "Dallas", "iata": "DFW" },
+      { "name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS" },
+      { "name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA" },
+      { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" },
+      { "name": "Denver Intl", "city": "Denver", "iata": "DEN" }
     ];
 
     function autocomplete(inputId, listId) {
       const input = document.getElementById(inputId);
       const datalist = document.getElementById(listId);
+
       input.addEventListener('input', function () {
         const val = this.value.toLowerCase();
         datalist.innerHTML = '';
         if (val.length < 2) return;
+
         const filtered = airports.filter(a =>
           a.name.toLowerCase().includes(val) ||
           a.city.toLowerCase().includes(val) ||
           a.iata.toLowerCase().startsWith(val)
         ).slice(0, 10);
+
         filtered.forEach(a => {
           const option = document.createElement('option');
           option.value = `${a.city} (${a.iata})`;
@@ -139,31 +146,35 @@
       });
     }
 
+    // disable past dates
+    const today = new Date().toISOString().split('T')[0];
     window.onload = () => {
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
 
-      // Обновление ссылки Google Flights
-      document.getElementById('from').addEventListener('input', updateGoogleLink);
-      document.getElementById('to').addEventListener('input', updateGoogleLink);
-      document.getElementById('departureDate').addEventListener('change', updateGoogleLink);
+      document.getElementById('departure-date').setAttribute('min', today);
+      document.getElementById('return-date').setAttribute('min', today);
     };
 
-    function extractIATA(value) {
-      const match = value.match(/\(([^)]+)\)$/);
-      return match ? match[1] : '';
-    }
+    // Google Flights button logic
+    document.getElementById("google-flights-link").addEventListener("click", function (e) {
+      e.preventDefault();
 
-    function updateGoogleLink() {
-      const from = extractIATA(document.getElementById('from').value);
-      const to = extractIATA(document.getElementById('to').value);
-      const departure = document.getElementById('departureDate').value;
+      const from = document.getElementById("from").value.match(/\((.*?)\)/);
+      const to = document.getElementById("to").value.match(/\((.*?)\)/);
+      const departure = document.getElementById("departure-date").value;
+      const returnDate = document.getElementById("return-date").value;
 
       if (from && to && departure) {
-        const url = `https://www.google.com/flights?hl=en#flt=${from}.${to}.${departure}`;
-        document.getElementById('googleLink').href = url;
+        let url = `https://www.google.com/travel/flights?q=Flights%20from%20${from[1]}%20to%20${to[1]}%20on%20${departure}`;
+        if (returnDate) {
+          url += `%20return%20on%20${returnDate}`;
+        }
+        window.open(url, '_blank');
+      } else {
+        alert("Please fill out From, To, and Departure Date to compare on Google Flights.");
       }
-    }
+    });
   </script>
 </body>
 </html>
