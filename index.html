@@ -22,6 +22,9 @@
     }
   </style>
 
+  <!-- Google Font: Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <!-- Flatpickr стили -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
@@ -33,21 +36,90 @@
     <img src="flyVitaTransparent.png" alt="FlyVita Logo" style="height: 150px; margin: 10px auto; display: block;" />
   </div>
 
-  <!-- ПРЕЗЕНТАЦИЯ FlyVita -->
-<div style="max-width: 600px; margin: 0 auto 40px; background-color: #075c63; color: white; padding: 2em; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); font-size: 16px;">
-  <h2 style="text-align: center; font-size: 24px; margin-bottom: 15px;">Welcome to <strong>FlyVita</strong></h2>
-  <p style="text-align: center; font-size: 17px; margin-bottom: 25px;">Your trusted partner for everything travel</p>
+  <!-- FlyVita Intro Section -->
+<style>
+  .flyvita-box {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    background-color: #075c63;
+    color: white;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    font-family: 'Poppins', sans-serif;
+  }
 
-  <ul style="list-style: none; padding: 0; line-height: 1.6; margin: 0;">
-    <li><strong>✈️ Flights:</strong> First Class, Business, and Economy fares to destinations worldwide</li>
-    <li><strong>🏨 Hotels & Resorts:</strong> Handpicked accommodations at unbeatable prices</li>
-    <li><strong>🚢 Cruises & Tours:</strong> Guided adventures and luxury vacations</li>
-    <li><strong>🌐 Full Travel Support:</strong> We handle flights, hotels, transfers, insurance & more</li>
+  .flyvita-box h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .flyvita-box p.subtitle {
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 25px;
+    font-weight: 300;
+  }
+
+  .flyvita-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.7;
+    font-size: 15.5px;
+  }
+
+  .flyvita-box ul li {
+    margin-bottom: 10px;
+  }
+
+  .flyvita-box p.tagline {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+    color: #d1ecf1;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 480px) {
+    .flyvita-box {
+      padding: 1.5em;
+    }
+
+    .flyvita-box h2 {
+      font-size: 22px;
+    }
+
+    .flyvita-box p.subtitle {
+      font-size: 16px;
+    }
+
+    .flyvita-box ul {
+      font-size: 15px;
+    }
+
+    .flyvita-box p.tagline {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<div class="flyvita-box">
+  <h2>Welcome to FlyVita</h2>
+  <p class="subtitle">Your trusted partner for everything travel</p>
+
+  <ul>
+    <li>✈️ <strong>Flights:</strong> First Class, Business, and Economy fares to destinations worldwide</li>
+    <li>🏨 <strong>Hotels & Resorts:</strong> Handpicked accommodations at unbeatable prices</li>
+    <li>🚢 <strong>Cruises & Tours:</strong> Guided adventures and luxury vacations</li>
+    <li>🌐 <strong>Full Travel Support:</strong> We handle flights, hotels, transfers, insurance & more</li>
   </ul>
 
-  <p style="margin-top: 25px; text-align: center; font-size: 17px; font-weight: bold;">
-    Fly smarter. Travel better. Your next adventure starts with FlyVita.
-  </p>
+  <p class="tagline">Fly smarter. Travel better. Your next adventure starts with FlyVita.</p>
 </div>
 
   <!-- ФОРМА -->
