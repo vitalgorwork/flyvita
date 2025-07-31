@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>FlyVita</title>
   <style>
     input, select {
@@ -81,9 +81,31 @@
     </p>
   </div>
 
-  <!-- СКРИПТ: подключение airport данных + автозаполнение -->
-  <script src="airports_top500.js"></script>
+  <!-- АВТОЗАПОЛНЕНИЕ: ВСТРОЕННЫЙ СПИСОК -->
   <script>
+    const airports = [
+      { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
+      { "name": "Los Angeles Intl", "city": "Los Angeles", "iata": "LAX" },
+      { "name": "Chicago O'Hare Intl", "city": "Chicago", "iata": "ORD" },
+      { "name": "Dallas Fort Worth Intl", "city": "Dallas-Fort Worth", "iata": "DFW" },
+      { "name": "Denver Intl", "city": "Denver", "iata": "DEN" },
+      { "name": "John F Kennedy Intl", "city": "New York", "iata": "JFK" },
+      { "name": "San Francisco Intl", "city": "San Francisco", "iata": "SFO" },
+      { "name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA" },
+      { "name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS" },
+      { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" },
+      { "name": "Miami Intl", "city": "Miami", "iata": "MIA" },
+      { "name": "Phoenix Sky Harbor Intl", "city": "Phoenix", "iata": "PHX" },
+      { "name": "Logan Intl", "city": "Boston", "iata": "BOS" },
+      { "name": "Charlotte Douglas Intl", "city": "Charlotte", "iata": "CLT" },
+      { "name": "Detroit Metro Wayne Co", "city": "Detroit", "iata": "DTW" },
+      { "name": "Minneapolis St Paul Intl", "city": "Minneapolis", "iata": "MSP" },
+      { "name": "Philadelphia Intl", "city": "Philadelphia", "iata": "PHL" },
+      { "name": "George Bush Intercontinental", "city": "Houston", "iata": "IAH" },
+      { "name": "Salt Lake City Intl", "city": "Salt Lake City", "iata": "SLC" },
+      { "name": "Washington Dulles Intl", "city": "Washington", "iata": "IAD" }
+    ];
+
     function autocomplete(inputId, listId) {
       const input = document.getElementById(inputId);
       const datalist = document.getElementById(listId);
