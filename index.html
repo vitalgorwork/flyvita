@@ -12,7 +12,7 @@
 
     input, select {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       margin-top: 5px;
       margin-bottom: 15px;
       border-radius: 6px;
@@ -21,10 +21,15 @@
       font-size: 16px;
     }
 
-    input[type="date"] {
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #008080;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
       font-size: 16px;
-      transform: scale(1.2);
-      transform-origin: left top;
     }
   </style>
 </head>
@@ -36,7 +41,7 @@
   </div>
 
   <!-- ФОРМА -->
-  <form id="quote-form" action="https://formspree.io/f/mgvzygnj" method="POST"
+  <form action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
@@ -76,10 +81,7 @@
       <input type="email" name="email" required placeholder="your@example.com" />
     </label>
 
-    <button type="submit"
-      style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
-      Request Quote
-    </button>
+    <button type="submit">Request Quote</button>
   </form>
 
   <!-- CONTACT SECTION -->
@@ -94,7 +96,7 @@
     </p>
   </div>
 
-  <!-- АВТОЗАПОЛНЕНИЕ -->
+  <!-- JS -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
@@ -102,11 +104,7 @@
       { "name": "John F Kennedy Intl", "city": "New York", "iata": "JFK" },
       { "name": "San Francisco Intl", "city": "San Francisco", "iata": "SFO" },
       { "name": "Chicago O'Hare Intl", "city": "Chicago", "iata": "ORD" },
-      { "name": "Dallas Fort Worth Intl", "city": "Dallas", "iata": "DFW" },
-      { "name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS" },
-      { "name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA" },
-      { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" },
-      { "name": "Denver Intl", "city": "Denver", "iata": "DEN" }
+      { "name": "Dallas Fort Worth Intl", "city": "Dallas", "iata": "DFW" }
     ];
 
     function autocomplete(inputId, listId) {
@@ -132,12 +130,12 @@
       });
     }
 
-    // disable past dates
-    const today = new Date().toISOString().split('T')[0];
     window.onload = () => {
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
 
+      // Disable past dates
+      const today = new Date().toISOString().split('T')[0];
       document.getElementById('departure-date').setAttribute('min', today);
       document.getElementById('return-date').setAttribute('min', today);
     };
