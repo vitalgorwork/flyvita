@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>FlyVita</title>
   <style>
-    input, select {
+    input, select, button {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -12,6 +12,13 @@
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+    }
+    .google-button {
+      background-color: #fbbc05;
+      color: black;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -23,7 +30,7 @@
   </div>
 
   <!-- ФОРМА -->
-  <form action="https://formspree.io/f/mgvzygnj" method="POST"
+  <form id="flightForm" action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
@@ -39,11 +46,11 @@
     </label>
 
     <label>Departure Date:
-      <input type="date" name="departure" id="departure" required />
+      <input type="date" id="departure" name="departure" required />
     </label>
 
     <label>Return Date:
-      <input type="date" name="return" id="return" />
+      <input type="date" id="return" name="return" />
     </label>
 
     <label>Class:
@@ -64,9 +71,12 @@
     </label>
 
     <button type="submit"
-      style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
+      style="background-color: #008080; color: white; font-weight: bold;">
       Request Quote
     </button>
+
+    <!-- КНОПКА GOOGLE FLIGHTS -->
+    <button type="button" class="google-button" onclick="openGoogleFlights()">Compare on Google Flights</button>
   </form>
 
   <!-- CONTACT SECTION -->
@@ -81,7 +91,7 @@
     </p>
   </div>
 
-  <!-- АВТОЗАПОЛНЕНИЕ И БЛОКИРОВКА ПРОШЕДШИХ ДАТ -->
+  <!-- СКРИПТ -->
   <script>
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
@@ -125,17 +135,27 @@
       });
     }
 
+    function openGoogleFlights() {
+      const from = document.getElementById("from").value.match(/\(([A-Z]{3})\)/);
+      const to = document.getElementById("to").value.match(/\(([A-Z]{3})\)/);
+      const date = document.getElementById("departure").value;
+
+      if (!from || !to || !date) {
+        alert("Please fill in From, To, and Departure Date correctly.");
+        return;
+      }
+
+      const url = `https://www.google.com/travel/flights?q=flights%20from%20${from[1]}%20to%20${to[1]}%20on%20${date}`;
+      window.open(url, "_blank");
+    }
+
     window.onload = () => {
-      // Блокируем выбор прошедших дат
       const today = new Date().toISOString().split('T')[0];
       document.getElementById("departure").setAttribute("min", today);
       document.getElementById("return").setAttribute("min", today);
-
-      // Автозаполнение аэропортов
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
     };
   </script>
-
 </body>
 </html>
