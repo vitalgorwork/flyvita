@@ -6,28 +6,33 @@
   <style>
     input, select, button, .google-button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 5px;
       margin-bottom: 15px;
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      font-size: 16px;
+      font-size: 18px;
+    }
+
+    input[type="date"] {
+      min-height: 45px;
     }
 
     .google-button {
-      background-color: #f8f8f8;
+      background-color: #f4c542;
       color: #053447;
       font-weight: bold;
-      border: 2px solid #008080;
+      border: none;
       text-decoration: none;
       display: inline-block;
       text-align: center;
       margin-top: 12px;
+      font-size: 18px;
     }
 
     .google-button:hover {
-      background-color: #008080;
+      background-color: #e0b030;
       color: white;
     }
   </style>
@@ -115,11 +120,7 @@
       { "name": "San Francisco Intl", "city": "San Francisco", "iata": "SFO" },
       { "name": "Seattle Tacoma Intl", "city": "Seattle", "iata": "SEA" },
       { "name": "McCarran Intl", "city": "Las Vegas", "iata": "LAS" },
-      { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" },
-      {"name": "Tokyo International Airport", "city": "Tokyo International Airport", "iata": "HND"},
-      {"name": "Dubai Creek SPB", "city": "Dubai Creek SPB", "iata": "DCG"},
-      {"name": "Vladivostok International Airport", "city": "Vladivostok International Airport", "iata": "VVO"},
-      {"name": "Khabarovsk-Novy Airport", "city": "Khabarovsk-Novy Airport", "iata": "KHV"}
+      { "name": "Orlando Intl", "city": "Orlando", "iata": "MCO" }
     ];
 
     function autocomplete(inputId, listId) {
@@ -145,7 +146,7 @@
       });
     }
 
-    // Disable past dates
+    // Отключение прошлых дат
     window.onload = () => {
       autocomplete('from', 'from-list');
       autocomplete('to', 'to-list');
@@ -155,7 +156,7 @@
       document.getElementById("return").setAttribute("min", today);
     };
 
-    // Update Google Flights button
+    // Обновление ссылки Google Flights
     document.addEventListener("input", () => {
       const from = document.getElementById("from").value;
       const to = document.getElementById("to").value;
