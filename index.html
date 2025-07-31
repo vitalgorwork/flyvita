@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FlyVita</title>
+</head>
 <body style="background-color: #053447; font-family: sans-serif; padding: 40px;">
 
   <!-- ЛОГО -->
@@ -12,13 +18,15 @@
     <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px; color: white;">Request a quote for your flight</h2>
 
     <label style="display: block; color: #ffffff;">From:
-      <input type="text" name="from" placeholder="City or Airport" required 
+      <input type="text" id="from" name="from" list="from-list" placeholder="City or Airport" required 
         style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+      <datalist id="from-list"></datalist>
     </label>
 
     <label style="display: block; color: #ffffff;">To:
-      <input type="text" name="to" placeholder="City or Airport" required 
+      <input type="text" id="to" name="to" list="to-list" placeholder="City or Airport" required 
         style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;" />
+      <datalist id="to-list"></datalist>
     </label>
 
     <label style="display: block; color: #ffffff;">Departure Date:
@@ -55,19 +63,58 @@
       style="width: 100%; padding: 12px; background-color: #008080; color: white; font-weight: bold; border: none; border-radius: 8px;">
       Request Quote
     </button>
-
   </form>
 
   <!-- CONTACT SECTION -->
-<div style="max-width: 600px; margin: 30px auto 0; background-color: #075c63; padding: 2em; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; color: white;">
-  <p style="margin: 10px 0; font-size: 18px;">
-    <span style="background: white; color: #075c63; border-radius: 50%; padding: 6px 10px; margin-right: 10px;">📞</span>
-    <a href="tel:+16505051070" style="color: white; text-decoration: none;">+1 (650) 505‑1070</a>
-  </p>
-  <p style="margin: 10px 0; font-size: 18px;">
-    <span style="background: white; color: #25D366; border-radius: 50%; padding: 6px 10px; margin-right: 10px;">💬</span>
-    <a href="https://wa.me/16505051070" target="_blank" style="color: white; text-decoration: none;">WhatsApp: +1 (650) 505‑1070</a>
-  </p>
-</div>
+  <div style="max-width: 600px; margin: 30px auto 0; background-color: #075c63; padding: 2em; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; color: white;">
+    <p style="margin: 10px 0; font-size: 18px;">
+      <span style="background: white; color: #075c63; border-radius: 50%; padding: 6px 10px; margin-right: 10px;">📞</span>
+      <a href="tel:+16505051070" style="color: white; text-decoration: none;">+1 (650) 505‑1070</a>
+    </p>
+    <p style="margin: 10px 0; font-size: 18px;">
+      <span style="background: white; color: #25D366; border-radius: 50%; padding: 6px 10px; margin-right: 10px;">💬</span>
+      <a href="https://wa.me/16505051070" target="_blank" style="color: white; text-decoration: none;">WhatsApp: +1 (650) 505‑1070</a>
+    </p>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    let airports = [];
+
+    fetch('airports.json') // путь к локальному файлу с аэропортами
+      .then(response => response.json())
+      .then(data => {
+        airports = data;
+      });
+
+    function autocomplete(inputId, listId) {
+      const input = document.getElementById(inputId);
+      const datalist = document.getElementById(listId);
+
+      input.addEventListener('input', function () {
+        const val = this.value.toLowerCase();
+        datalist.innerHTML = '';
+        if (val.length < 2) return;
+
+        const filtered = airports.filter(a =>
+          a.name.toLowerCase().includes(val) ||
+          a.city.toLowerCase().includes(val) ||
+          a.iata.toLowerCase().startsWith(val)
+        ).slice(0, 10);
+
+        filtered.forEach(a => {
+          const option = document.createElement('option');
+          option.value = `${a.city} (${a.iata})`;
+          datalist.appendChild(option);
+        });
+      });
+    }
+
+    window.onload = () => {
+      autocomplete('from', 'from-list');
+      autocomplete('to', 'to-list');
+    };
+  </script>
 
 </body>
+</html>
