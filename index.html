@@ -130,37 +130,41 @@
 
 <!-- Additional Travel Request Form -->
 <section id="booking-request">
-  <form id="travelForm"
+  <form action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
 
     <h2 style="color: white; text-align: center; font-size: 24px; margin-bottom: 20px;">Travel Request</h2>
 
     <label>City for Hotel Booking:
-      <input type="text" id="city" name="city" placeholder="e.g., Paris" required />
+      <input type="text" id="city" name="City" placeholder="e.g., Paris" required />
     </label>
 
     <label>Check-in Date:
-      <input type="text" id="travel-checkin" name="checkin" placeholder="Select date" required />
+      <input type="text" id="travel-checkin" name="Check-in Date" placeholder="Select date" required />
     </label>
 
     <label>Check-out Date:
-      <input type="text" id="travel-checkout" name="checkout" placeholder="Select date" required />
+      <input type="text" id="travel-checkout" name="Check-out Date" placeholder="Select date" required />
     </label>
 
     <label for="hotelRequest">Hotel Preferences / Room Type:</label>
-<textarea id="hotelRequest" name="hotelRequest" rows="4"
-  placeholder="e.g., 4‑star near city center, breakfast included"
-  style="width: 100%; padding: 12px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box;"></textarea>
+    <textarea id="hotelRequest" name="Hotel Preferences"
+      placeholder="e.g., 4‑star near city center, breakfast included"
+      style="width: 100%; padding: 12px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box;" rows="4"></textarea>
 
     <div style="margin-bottom: 10px;">
-      <input type="checkbox" id="rentCar" name="rentCar" />
+      <input type="checkbox" id="rentCar" name="Want Car Rental" />
       <label for="rentCar">I would also like to rent a car</label>
     </div>
 
     <div style="margin-bottom: 20px;">
-      <input type="checkbox" id="cruise" name="cruise" />
+      <input type="checkbox" id="cruise" name="Interested in Cruise" />
       <label for="cruise">I'm interested in a cruise</label>
     </div>
+
+    <label>Your Email:
+      <input type="email" name="email" required placeholder="info@flyvita.net" />
+    </label>
 
     <div style="text-align: center;">
       <button type="submit"
@@ -169,10 +173,19 @@
       </button>
     </div>
   </form>
-
-  <div id="responseMsg"
-    style="text-align: center; margin-top: 15px; font-weight: bold; color: #075c63;"></div>
 </section>
+
+  <script>
+  flatpickr("#travel-checkin", {
+    minDate: "today",
+    dateFormat: "Y-m-d"
+  });
+
+  flatpickr("#travel-checkout", {
+    minDate: "today",
+    dateFormat: "Y-m-d"
+  });
+</script>
   
   <!-- ФОРМА -->
   <form action="https://formspree.io/f/mgvzygnj" method="POST"
