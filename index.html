@@ -128,79 +128,45 @@
     <!-- <p class="tagline">Fly smarter. Travel better. Your next adventure starts with FlyVita.</p> -->
   </div>
 
-<!-- Travel Request Form -->
+<!-- Additional Travel Request Form -->
 <section id="booking-request">
-  <h2 style="text-align:center;">Дополнительный запрос</h2>
-  <form id="travelForm">
-    <div>
-      <label>Город (куда вы хотите забронировать отель):</label>
-      <input type="text" name="city" placeholder="Например, Париж" required>
+  <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Travel Request</h2>
+  <form id="travelForm" style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
+    <div style="margin-bottom: 1em;">
+      <label for="city">City for Hotel Booking:</label>
+      <input type="text" id="city" name="city" placeholder="e.g., Paris" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;">
     </div>
-    <div>
-      <label>Дата заезда:</label>
-      <input type="date" name="checkin" required>
-      <label>Дата выезда:</label>
-      <input type="date" name="checkout" required>
+    <div style="margin-bottom: 1em;">
+      <label for="checkin">Check-in Date:</label>
+      <input type="date" id="checkin" name="checkin" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;">
     </div>
-    <div>
-      <label>Гостиница / пожелания:</label>
-      <textarea name="hotelRequest" placeholder="Например, 4‑звёзды, с завтраком, недалеко от центра..." rows="4"></textarea>
+    <div style="margin-bottom: 1em;">
+      <label for="checkout">Check-out Date:</label>
+      <input type="date" id="checkout" name="checkout" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;">
     </div>
-    <div>
-      <input type="checkbox" name="rentCar" id="rentCar">
-      <label for="rentCar">Также хочу арендовать машину</label>
+    <div style="margin-bottom: 1em;">
+      <label for="hotelRequest">Hotel Preferences / Room Type:</label>
+      <textarea id="hotelRequest" name="hotelRequest" rows="4" placeholder="e.g., 4-star near city center, breakfast included" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;"></textarea>
     </div>
-    <div>
-      <input type="checkbox" name="cruise" id="cruise">
-      <label for="cruise">Интересует круиз</label>
+    <div style="margin-bottom: 1em;">
+      <input type="checkbox" id="rentCar" name="rentCar">
+      <label for="rentCar">I would also like to rent a car</label>
     </div>
-    <button type="submit">Отправить запрос</button>
+    <div style="margin-bottom: 1.5em;">
+      <input type="checkbox" id="cruise" name="cruise">
+      <label for="cruise">I’m interested in a cruise</label>
+    </div>
+    <button type="submit" style="padding: 10px 20px; font-size: 1em; background: #f1c40f; color: black; border: none; border-radius: 6px; cursor: pointer;">Submit Request</button>
   </form>
-  <div id="responseMsg" style="text-align:center; margin-top:10px;"></div>
+  <div id="responseMsg" style="text-align:center; margin-top:15px; font-weight: bold;"></div>
 </section>
-
-<style>
-  #booking-request {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.08);
-  }
-  #booking-request form div {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-  }
-  #booking-request input[type="text"],
-  #booking-request input[type="date"],
-  #booking-request textarea {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  #booking-request button {
-    padding: 10px 20px;
-    font-size: 1.1em;
-    background: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  #booking-request button:hover {
-    background-color: #0056b3;
-  }
-</style>
 
 <script>
   document.getElementById('travelForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const data = new FormData(this);
     const output = Array.from(data.entries()).map(([key, val]) => `${key}: ${val}`).join(' | ');
-    document.getElementById('responseMsg').textContent = 'Спасибо! Ваш запрос отправлен: ' + output;
+    document.getElementById('responseMsg').textContent = 'Thank you! Your request has been submitted.';
     this.reset();
   });
 </script>
