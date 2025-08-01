@@ -128,6 +128,83 @@
     <!-- <p class="tagline">Fly smarter. Travel better. Your next adventure starts with FlyVita.</p> -->
   </div>
 
+<!-- Travel Request Form -->
+<section id="booking-request">
+  <h2 style="text-align:center;">Дополнительный запрос</h2>
+  <form id="travelForm">
+    <div>
+      <label>Город (куда вы хотите забронировать отель):</label>
+      <input type="text" name="city" placeholder="Например, Париж" required>
+    </div>
+    <div>
+      <label>Дата заезда:</label>
+      <input type="date" name="checkin" required>
+      <label>Дата выезда:</label>
+      <input type="date" name="checkout" required>
+    </div>
+    <div>
+      <label>Гостиница / пожелания:</label>
+      <textarea name="hotelRequest" placeholder="Например, 4‑звёзды, с завтраком, недалеко от центра..." rows="4"></textarea>
+    </div>
+    <div>
+      <input type="checkbox" name="rentCar" id="rentCar">
+      <label for="rentCar">Также хочу арендовать машину</label>
+    </div>
+    <div>
+      <input type="checkbox" name="cruise" id="cruise">
+      <label for="cruise">Интересует круиз</label>
+    </div>
+    <button type="submit">Отправить запрос</button>
+  </form>
+  <div id="responseMsg" style="text-align:center; margin-top:10px;"></div>
+</section>
+
+<style>
+  #booking-request {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+  }
+  #booking-request form div {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  #booking-request input[type="text"],
+  #booking-request input[type="date"],
+  #booking-request textarea {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  #booking-request button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #booking-request button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<script>
+  document.getElementById('travelForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = new FormData(this);
+    const output = Array.from(data.entries()).map(([key, val]) => `${key}: ${val}`).join(' | ');
+    document.getElementById('responseMsg').textContent = 'Спасибо! Ваш запрос отправлен: ' + output;
+    this.reset();
+  });
+</script>
+  
   <!-- ФОРМА -->
   <form action="https://formspree.io/f/mgvzygnj" method="POST"
     style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
