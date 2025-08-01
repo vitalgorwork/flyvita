@@ -130,8 +130,8 @@
 
 <!-- Additional Travel Request Form -->
 <section id="booking-request">
-  <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Travel Request</h2>
   <form id="travelForm" style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
+    <h2 style="color: white; text-align: center; font-size: 24px; margin-bottom: 20px;">Travel Request</h2>
     <div style="margin-bottom: 1em;">
       <label for="city">City for Hotel Booking:</label>
       <input type="text" id="city" name="city" placeholder="e.g., Paris" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;">
@@ -146,7 +146,7 @@
     </div>
     <div style="margin-bottom: 1em;">
       <label for="hotelRequest">Hotel Preferences / Room Type:</label>
-      <textarea id="hotelRequest" name="hotelRequest" rows="4" placeholder="e.g., 4-star near city center, breakfast included" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;"></textarea>
+      <textarea id="hotelRequest" name="hotelRequest" rows="4" placeholder="e.g., 4‑star near city center, breakfast included" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;"></textarea>
     </div>
     <div style="margin-bottom: 1em;">
       <input type="checkbox" id="rentCar" name="rentCar">
@@ -156,16 +156,16 @@
       <input type="checkbox" id="cruise" name="cruise">
       <label for="cruise">I’m interested in a cruise</label>
     </div>
-    <button type="submit" style="padding: 10px 20px; font-size: 1em; background: #f1c40f; color: black; border: none; border-radius: 6px; cursor: pointer;">Submit Request</button>
+    <!-- Это кнопка точно как на Request a Flight -->
+    <button type="submit" style="background: #f1c40f; color: black; font-size: 1.1em; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; width: 100%;">Submit Request</button>
   </form>
-  <div id="responseMsg" style="text-align:center; margin-top:15px; font-weight: bold;"></div>
+  <div id="responseMsg" style="text-align: center; margin-top: 15px; font-weight: bold; color: #075c63;"></div>
 </section>
 
 <script>
   document.getElementById('travelForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const data = new FormData(this);
-    const output = Array.from(data.entries()).map(([key, val]) => `${key}: ${val}`).join(' | ');
+    // Можно расширить позже — пока только сообщение
     document.getElementById('responseMsg').textContent = 'Thank you! Your request has been submitted.';
     this.reset();
   });
