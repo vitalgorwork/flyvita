@@ -119,23 +119,27 @@
   <!-- Travel Request Form -->
   <form id="travelForm" class="form-block">
     <h2>Travel Request</h2>
-    <label>City for Hotel Booking:
-      <input type="text" name="City" placeholder="e.g., Paris" required />
-    </label>
-    <label>Check-in Date:
-      <input type="text" id="travel-checkin" name="Check-in Date" placeholder="Select date" required />
-    </label>
-    <label>Check-out Date:
-      <input type="text" id="travel-checkout" name="Check-out Date" placeholder="Select date" required />
-    </label>
-    <label>Hotel Preferences / Room Type:
-      <textarea name="Hotel Preferences" placeholder="e.g., 4‑star near city center, breakfast included" rows="4"></textarea>
-    </label>
+    <label for="city">City for Hotel Booking:</label>
+    <input type="text" id="city" name="City" placeholder="e.g., Paris" required />
+
+    <label for="travel-checkin">Check-in Date:</label>
+    <input type="text" id="travel-checkin" name="Check-in Date" placeholder="Select date" required />
+
+    <label for="travel-checkout">Check-out Date:</label>
+    <input type="text" id="travel-checkout" name="Check-out Date" placeholder="Select date" required />
+
+    <label for="hotelRequest">Hotel Preferences / Room Type:</label>
+    <textarea id="hotelRequest" name="Hotel Preferences" placeholder="e.g., 4‑star near city center, breakfast included" rows="4"></textarea>
+
     <label><input type="checkbox" name="Want Car Rental" /> I would also like to rent a car</label>
     <label><input type="checkbox" name="Interested in Cruise" /> I'm interested in a cruise</label>
-     <label>Email:
-      <input type="email" name="email" required placeholder="your@example.com" />
-    </label>
+
+    <label for="travel-phone">Phone Number:</label>
+    <input type="tel" id="travel-phone" name="phone" placeholder="+1 (___) ___-____" />
+
+    <label for="travel-email">Your Email:</label>
+    <input type="email" id="travel-email" name="email" required placeholder="your@example.com" />
+
     <button type="submit">Submit Request</button>
     <div id="travelResponseMsg" class="response-message"></div>
   </form>
@@ -143,37 +147,55 @@
   <!-- Flight Quote Form -->
   <form id="flightForm" class="form-block">
     <h2>Request a Quote for Your Flight</h2>
-    <label>From:
-      <input type="text" id="from" name="from" list="from-list" placeholder="City or Airport" required />
-      <datalist id="from-list"></datalist>
-    </label>
-    <label>To:
-      <input type="text" id="to" name="to" list="to-list" placeholder="City or Airport" required />
-      <datalist id="to-list"></datalist>
-    </label>
-    <label>Departure Date:
-      <input type="text" id="departure-date" name="departure" placeholder="Select date" required />
-    </label>
-    <label>Return Date:
-      <input type="text" id="return-date" name="return" placeholder="Select date" />
-    </label>
-    <label>Class:
-      <select name="class" required>
-        <option>Business</option>
-        <option>First</option>
-        <option>Premium Economy</option>
-        <option>Economy</option>
-      </select>
-    </label>
-    <label>Your Name:
-      <input type="text" name="name" required placeholder="Full Name" />
-    </label>
-    <label>Email:
-      <input type="email" name="email" required placeholder="your@example.com" />
-    </label>
+
+    <label for="from">From:</label>
+    <input type="text" id="from" name="from" list="from-list" placeholder="City or Airport" required />
+    <datalist id="from-list"></datalist>
+
+    <label for="to">To:</label>
+    <input type="text" id="to" name="to" list="to-list" placeholder="City or Airport" required />
+    <datalist id="to-list"></datalist>
+
+    <label for="departure-date">Departure Date:</label>
+    <input type="text" id="departure-date" name="departure" placeholder="Select date" required />
+
+    <label for="return-date">Return Date:</label>
+    <input type="text" id="return-date" name="return" placeholder="Select date" />
+
+    <label for="class">Class:</label>
+    <select name="class" required>
+      <option>Business</option>
+      <option>First</option>
+      <option>Premium Economy</option>
+      <option>Economy</option>
+    </select>
+
+    <label for="flight-name">Your Name:</label>
+    <input type="text" id="flight-name" name="name" required placeholder="Full Name" />
+
+    <label for="flight-phone">Phone Number:</label>
+    <input type="tel" id="flight-phone" name="phone" placeholder="+1 (___) ___-____" />
+
+    <label for="flight-email">Email:</label>
+    <input type="email" id="flight-email" name="email" required placeholder="your@example.com" />
+
     <button type="submit">Request a Quote</button>
     <div id="flightResponseMsg" class="response-message"></div>
   </form>
+
+  <!-- CONTACT -->
+  <div style="max-width: 600px; margin: 30px auto 0; background-color: #075c63; padding: 2em; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; color: white;">
+    <p style="margin: 10px 0; font-size: 18px;">
+      <span style="margin-right: 10px; font-size: 20px; vertical-align: middle; color: white;">
+        <i class="fas fa-phone-alt" style="color: white;"></i></span>
+      <a href="tel:+16505051070" style="color: white; text-decoration: none;">+1 (650) 505‑1070</a>
+    </p>
+    <p style="margin: 10px 0; font-size: 18px;">
+      <span style="margin-right: 10px; font-size: 20px; vertical-align: middle; color: #25D366;">
+        <i class="fab fa-whatsapp"></i></span>
+      <a href="https://wa.me/16505051070" target="_blank" style="color: white; text-decoration: none;">WhatsApp: +1 (650) 505‑1070</a>
+    </p>
+  </div>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -256,19 +278,5 @@
       autocomplete('to', 'to-list');
     };
   </script>
-
-<!-- CONTACT -->
-  <div style="max-width: 600px; margin: 30px auto 0; background-color: #075c63; padding: 2em; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; color: white;">
-    <p style="margin: 10px 0; font-size: 18px;">
-      <span style="margin-right: 10px; font-size: 20px; vertical-align: middle; color: white;">
-  <i class="fas fa-phone-alt" style="color: white;"></i></span>
-      <a href="tel:+16505051070" style="color: white; text-decoration: none;">+1 (650) 505‑1070</a>
-    </p>
-    <p style="margin: 10px 0; font-size: 18px;">
-      <span style="margin-right: 10px; font-size: 20px; vertical-align: middle; color: #25D366;">
-  <i class="fab fa-whatsapp"></i></span>
-      <a href="https://wa.me/16505051070" target="_blank" style="color: white; text-decoration: none;">WhatsApp: +1 (650) 505‑1070</a>
-    </p>
-  </div>
 </body>
 </html>
