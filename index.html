@@ -1,15 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>FlyVita</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <!-- Google Font: Poppins -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Flatpickr стили -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
   <style>
@@ -20,7 +17,7 @@
       margin: 0;
     }
 
-    input, select, button {
+    input, select, button, textarea {
       width: 100%;
       padding: 12px;
       margin-top: 5px;
@@ -31,11 +28,6 @@
       font-size: 16px;
     }
 
-    input[type="date"] {
-      font-size: 16px;
-    }
-
-    /* FlyVita presentation block */
     .flyvita-box {
       max-width: 600px;
       margin: 0 auto 40px;
@@ -68,151 +60,103 @@
       font-size: 15.5px;
     }
 
-    .flyvita-box ul li {
-      margin-bottom: 10px;
+    .form-block {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      padding: 2em;
+      background: #075c63;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      color: white;
     }
 
-    .flyvita-box p.tagline {
-      margin-top: 25px;
+    .form-block h2 {
       text-align: center;
-      font-size: 16px;
-      font-weight: 500;
-      font-style: italic;
-      color: #d1ecf1;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: white;
     }
 
-    /* Mobile adjustments */
-    @media (max-width: 480px) {
-      .flyvita-box {
-        padding: 1.5em;
-      }
+    .form-block button {
+      width: 50%;
+      padding: 18px;
+      margin: 35px auto 0;
+      display: block;
+      background-color: #ffc107;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+    }
 
-      .flyvita-box h2 {
-        font-size: 22px;
-      }
-
-      .flyvita-box p.subtitle {
-        font-size: 16px;
-      }
-
-      .flyvita-box ul {
-        font-size: 15px;
-      }
-
-      .flyvita-box p.tagline {
-        font-size: 15px;
-      }
+    .response-message {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      color: white;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ЛОГО -->
   <div style="text-align: center; margin-bottom: 30px;">
     <img src="flyVitaTransparent.png" alt="FlyVita Logo" style="height: 150px; margin: 10px auto; display: block;" />
   </div>
 
-  <!-- FlyVita Welcome Block -->
   <div class="flyvita-box">
     <h2>Welcome to FlyVita</h2>
     <p class="subtitle">Your trusted partner for everything travel</p>
-
     <ul>
       <li>✈️ <strong>Flights:</strong> First Class, Business, and Economy fares to destinations worldwide</li>
       <li>🏨 <strong>Hotels & Resorts:</strong> Handpicked accommodations at unbeatable prices</li>
       <li>🚢 <strong>Cruises & Tours:</strong> Guided adventures and luxury vacations</li>
       <li>🌐 <strong>Full Travel Support:</strong> We handle flights, hotels, transfers, insurance & more</li>
     </ul>
-
-    <!-- <p class="tagline">Fly smarter. Travel better. Your next adventure starts with FlyVita.</p> -->
   </div>
 
-<!-- Additional Travel Request Form -->
-<section id="booking-request" style="margin-bottom: 50px;">
-  <form id="travelForm"
-    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
-
-    <h2 style="color: white; text-align: center; font-size: 24px; margin-bottom: 20px;">Travel Request</h2>
-
+  <!-- Travel Request Form -->
+  <form id="travelForm" class="form-block">
+    <h2>Travel Request</h2>
     <label>City for Hotel Booking:
-      <input type="text" id="city" name="City" placeholder="e.g., Paris" required />
+      <input type="text" name="City" placeholder="e.g., Paris" required />
     </label>
-
     <label>Check-in Date:
       <input type="text" id="travel-checkin" name="Check-in Date" placeholder="Select date" required />
     </label>
-
     <label>Check-out Date:
       <input type="text" id="travel-checkout" name="Check-out Date" placeholder="Select date" required />
     </label>
-
-    <label for="hotelRequest">Hotel Preferences / Room Type:</label>
-    <textarea id="hotelRequest" name="Hotel Preferences"
-      placeholder="e.g., 4‑star near city center, breakfast included"
-      style="width: 100%; padding: 12px; margin-top: 5px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box;" rows="4"></textarea>
-
-    <div style="margin-bottom: 10px;">
-      <input type="checkbox" id="rentCar" name="Want Car Rental" />
-      <label for="rentCar">I would also like to rent a car</label>
-    </div>
-
-    <div style="margin-bottom: 20px;">
-      <input type="checkbox" id="cruise" name="Interested in Cruise" />
-      <label for="cruise">I'm interested in a cruise</label>
-    </div>
-
+    <label>Hotel Preferences / Room Type:
+      <textarea name="Hotel Preferences" placeholder="e.g., 4‑star near city center, breakfast included" rows="4"></textarea>
+    </label>
+    <label><input type="checkbox" name="Want Car Rental" /> I would also like to rent a car</label>
+    <label><input type="checkbox" name="Interested in Cruise" /> I'm interested in a cruise</label>
     <label>Your Email:
       <input type="email" name="email" required placeholder="your@example.com" />
     </label>
-
-    <div style="text-align: center;">
-      <button type="submit"
-        style="width: 50%; padding: 18px; margin-top: 35px; background-color: #ffc107; color: black; font-weight: bold; border: none; border-radius: 8px; font-size: 18px;">
-        Submit Request
-      </button>
-    </div>
+    <button type="submit">Submit Request</button>
+    <div id="travelResponseMsg" class="response-message"></div>
   </form>
 
-  <div id="travelResponseMsg" style="text-align: center; margin-top: 20px;"></div>
-</section>
-
-  <script>
-  flatpickr("#travel-checkin", {
-    minDate: "today",
-    dateFormat: "Y-m-d"
-  });
-
-  flatpickr("#travel-checkout", {
-    minDate: "today",
-    dateFormat: "Y-m-d"
-  });
-</script>
-  
-  <!-- ФОРМА -->
-  <form action="https://formspree.io/f/mgvzygnj" method="POST"
-    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
-
-    <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Request a quote for your flight</h2>
-
+  <!-- Flight Quote Form -->
+  <form id="flightForm" class="form-block">
+    <h2>Request a Quote for Your Flight</h2>
     <label>From:
       <input type="text" id="from" name="from" list="from-list" placeholder="City or Airport" required />
       <datalist id="from-list"></datalist>
     </label>
-
     <label>To:
       <input type="text" id="to" name="to" list="to-list" placeholder="City or Airport" required />
       <datalist id="to-list"></datalist>
     </label>
-
     <label>Departure Date:
       <input type="text" id="departure-date" name="departure" placeholder="Select date" required />
     </label>
-
     <label>Return Date:
       <input type="text" id="return-date" name="return" placeholder="Select date" />
     </label>
-
     <label>Class:
       <select name="class" required>
         <option>Business</option>
@@ -221,39 +165,52 @@
         <option>Economy</option>
       </select>
     </label>
-
     <label>Your Name:
       <input type="text" name="name" required placeholder="Full Name" />
     </label>
-
     <label>Email:
       <input type="email" name="email" required placeholder="your@example.com" />
     </label>
-
-    <div style="text-align: center;">
-      <button type="submit"
-        style="width: 50%; padding: 18px; margin-top: 35px; background-color: #ffc107; color: black; font-weight: bold; border: none; border-radius: 8px; font-size: 18px;">
-        Request a Quote
-      </button>
-    </div>
+    <button type="submit">Request a Quote</button>
+    <div id="flightResponseMsg" class="response-message"></div>
   </form>
 
-  <!-- CONTACT -->
-  <div style="max-width: 600px; margin: 30px auto 0; background-color: #075c63; padding: 2em; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; color: white;">
-    <p style="margin: 10px 0; font-size: 18px;">
-      <span style="margin-right: 10px; font-size: 20px; vertical-align: middle; color: white;">
-  <i class="fas fa-phone-alt" style="color: white;"></i></span>
-      <a href="tel:+16505051070" style="color: white; text-decoration: none;">+1 (650) 505‑1070</a>
-    </p>
-    <p style="margin: 10px 0; font-size: 18px;">
-      <span style="margin-right: 10px; font-size: 20px; vertical-align: middle; color: #25D366;">
-  <i class="fab fa-whatsapp"></i></span>
-      <a href="https://wa.me/16505051070" target="_blank" style="color: white; text-decoration: none;">WhatsApp: +1 (650) 505‑1070</a>
-    </p>
-  </div>
-
-  <!-- СКРИПТЫ -->
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
+    flatpickr("#departure-date", { minDate: "today", dateFormat: "Y-m-d" });
+    flatpickr("#return-date", { minDate: "today", dateFormat: "Y-m-d" });
+    flatpickr("#travel-checkin", { minDate: "today", dateFormat: "Y-m-d" });
+    flatpickr("#travel-checkout", { minDate: "today", dateFormat: "Y-m-d" });
+
+    function handleFormSubmit(formId, endpoint, responseContainerId) {
+      const form = document.getElementById(formId);
+      const responseMsg = document.getElementById(responseContainerId);
+      if (!form) return;
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: formData
+          });
+          if (response.ok) {
+            responseMsg.textContent = 'Thank you! Your request has been submitted.';
+            form.reset();
+          } else {
+            responseMsg.textContent = 'Error. Please try again later.';
+          }
+        } catch (error) {
+          responseMsg.textContent = 'Error sending request.';
+        }
+      });
+    }
+
+    handleFormSubmit('flightForm', 'https://formspree.io/f/mgvzygnj', 'flightResponseMsg');
+    handleFormSubmit('travelForm', 'https://formspree.io/f/mgvzygnj', 'travelResponseMsg');
+
     const airports = [
       { "name": "Hartsfield Jackson Atlanta Intl", "city": "Atlanta", "iata": "ATL" },
       { "name": "Los Angeles Intl", "city": "Los Angeles", "iata": "LAX" },
@@ -268,10 +225,7 @@
       { "name": "Vladivostok Intl", "city": "Vladivostok", "iata": "VVO" },
       { "name": "Tokyo Haneda", "city": "Tokyo", "iata": "HND" },
       { "name": "Dubai Intl", "city": "Dubai", "iata": "DXB" },
-      { "name": "Tokyo International Airport", "city": "Tokyo International Airport", "iata": "HND" },
-      { "name": "Dubai Creek SPB", "city": "Dubai Creek SPB", "iata": "DCG" },
-      { "name": "Vladivostok International Airport", "city": "Vladivostok International Airport", "iata": "VVO" },
-      { "name": "Khabarovsk-Novy Airport", "city": "Khabarovsk-Novy Airport", "iata": "KHV" }
+      { "name": "Khabarovsk-Novy Airport", "city": "Khabarovsk", "iata": "KHV" }
     ];
 
     function autocomplete(inputId, listId) {
@@ -302,19 +256,5 @@
       autocomplete('to', 'to-list');
     };
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script>
-    flatpickr("#departure-date", {
-      minDate: "today",
-      dateFormat: "Y-m-d"
-    });
-
-    flatpickr("#return-date", {
-      minDate: "today",
-      dateFormat: "Y-m-d"
-    });
-  </script>
-
 </body>
 </html>
