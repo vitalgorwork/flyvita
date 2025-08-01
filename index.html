@@ -130,46 +130,49 @@
 
 <!-- Additional Travel Request Form -->
 <section id="booking-request">
-  <form id="travelForm" style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
+  <form id="travelForm"
+    style="max-width: 600px; margin: 0 auto; padding: 2em; background: #075c63; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); color: white;">
+
     <h2 style="color: white; text-align: center; font-size: 24px; margin-bottom: 20px;">Travel Request</h2>
-    <div style="margin-bottom: 1em;">
-      <label for="city">City for Hotel Booking:</label>
-      <input type="text" id="city" name="city" placeholder="e.g., Paris" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;">
-    </div>
-    <div style="margin-bottom: 1em;">
-      <label for="checkin">Check-in Date:</label>
-      <input type="date" id="checkin" name="checkin" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;">
-    </div>
-    <div style="margin-bottom: 1em;">
-      <label for="checkout">Check-out Date:</label>
-      <input type="date" id="checkout" name="checkout" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;">
-    </div>
-    <div style="margin-bottom: 1em;">
-      <label for="hotelRequest">Hotel Preferences / Room Type:</label>
-      <textarea id="hotelRequest" name="hotelRequest" rows="4" placeholder="e.g., 4‑star near city center, breakfast included" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: none;"></textarea>
-    </div>
-    <div style="margin-bottom: 1em;">
-      <input type="checkbox" id="rentCar" name="rentCar">
+
+    <label>City for Hotel Booking:
+      <input type="text" id="city" name="city" placeholder="e.g., Paris" required />
+    </label>
+
+    <label>Check-in Date:
+      <input type="text" id="travel-checkin" name="checkin" placeholder="Select date" required />
+    </label>
+
+    <label>Check-out Date:
+      <input type="text" id="travel-checkout" name="checkout" placeholder="Select date" required />
+    </label>
+
+    <label>Hotel Preferences / Room Type:
+      <textarea id="hotelRequest" name="hotelRequest" rows="4"
+        placeholder="e.g., 4‑star near city center, breakfast included"></textarea>
+    </label>
+
+    <div style="margin-bottom: 10px;">
+      <input type="checkbox" id="rentCar" name="rentCar" />
       <label for="rentCar">I would also like to rent a car</label>
     </div>
-    <div style="margin-bottom: 1.5em;">
-      <input type="checkbox" id="cruise" name="cruise">
-      <label for="cruise">I’m interested in a cruise</label>
-    </div>
-    <!-- Это кнопка точно как на Request a Flight -->
-    <button type="submit" style="background: #f1c40f; color: black; font-size: 1.1em; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; width: 100%;">Submit Request</button>
-  </form>
-  <div id="responseMsg" style="text-align: center; margin-top: 15px; font-weight: bold; color: #075c63;"></div>
-</section>
 
-<script>
-  document.getElementById('travelForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    // Можно расширить позже — пока только сообщение
-    document.getElementById('responseMsg').textContent = 'Thank you! Your request has been submitted.';
-    this.reset();
-  });
-</script>
+    <div style="margin-bottom: 20px;">
+      <input type="checkbox" id="cruise" name="cruise" />
+      <label for="cruise">I'm interested in a cruise</label>
+    </div>
+
+    <div style="text-align: center;">
+      <button type="submit"
+        style="width: 50%; padding: 18px; margin-top: 35px; background-color: #ffc107; color: black; font-weight: bold; border: none; border-radius: 8px; font-size: 18px;">
+        Submit Request
+      </button>
+    </div>
+  </form>
+
+  <div id="responseMsg"
+    style="text-align: center; margin-top: 15px; font-weight: bold; color: #075c63;"></div>
+</section>
   
   <!-- ФОРМА -->
   <form action="https://formspree.io/f/mgvzygnj" method="POST"
